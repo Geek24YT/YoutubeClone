@@ -1,0 +1,19 @@
+body{
+  margin: 0;
+  padding: 0;
+  /* background-color: black; */
+}
+.nav-bar{
+  height: 56px;
+  background-color: black;
+}
+
+.nav-search{
+  outline: none;
+  border-radius: 50px;
+}
+
+.react-player {
+  height: 70vh !important;
+  width: 100% !important;
+} 
