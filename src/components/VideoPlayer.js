@@ -22,10 +22,15 @@ function VideoPlayer() {
     fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
       (data) => setRelatedVideos(data.items)
     );
-    fetchFromAPI(`commentThreads?part=snippet&videoId=${videoDetail.id}`).then(
-      (data) => setVideoComments(data)
-    );
   }, [id]);
+
+  useEffect(() => {
+    if (videoDetail && videoDetail.id) {
+      fetchFromAPI(`commentThreads?part=snippet&videoId=${videoDetail.id}`).then(
+        (data) => setVideoComments(data.items)
+      );
+    }
+  }, [videoDetail]);
 
   if (!videoDetail?.snippet) return "Loading....";
   const {
@@ -58,7 +63,7 @@ function VideoPlayer() {
             channelTitle={videoDetail?.snippet?.channelTitle}
             videoViewCount={videoDetail?.statistics?.viewCount}
           />
-          {/* <Comments comments={videoComments} /> */}
+          <Comments comments={videoComments} />
         </Box>
         <Box sx={{ width: "35%", backgroundColor: "#0F0F0F" }}>
           <RelatedVideos videos={relatedVideos} />
